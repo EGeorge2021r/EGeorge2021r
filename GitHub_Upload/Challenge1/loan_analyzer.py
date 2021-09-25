@@ -1,5 +1,6 @@
 # coding: utf-8
 import csv
+import os
 from pathlib import Path
 
 """Part 1: Automate the Calculations.
@@ -228,7 +229,7 @@ Output this list of inexpensive loans to a csv file
 
 """
 
-import os
+
 
 #inexpensive_loans = [500, 200]
 
