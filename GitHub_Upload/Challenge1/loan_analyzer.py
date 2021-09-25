@@ -204,11 +204,14 @@ print(f"The inexpensive loan is :, ${inexpensive_loans}")
 for i in range(len(loans)):
   
 # print(loan_price in loans) using the get function 
+
   print(loans[i].get("loan_price"))
 
 # @TODO: Print the `inexpensive_loans` list
+
 # YOUR CODE HERE!
 # The inexpensive loans from the list is printed  below with comments 
+
 print(f"The inexpensive loan is :, ${inexpensive_loans}")
 
 """Part 5: Save the results.
@@ -225,14 +228,42 @@ Output this list of inexpensive loans to a csv file
 
 """
 
+import os
+
+#inexpensive_loans = [500, 200]
+
+#filepath = Path()
+
+'''with open(filepath, "r") as csvfile:
+    #csvreader = csv.reader(csvfile)
+    #header = next(csvreader)
+    for row in csvreader:
+        print(row)'''
+
+
+
+
 # Set the output header
 header = ["loan_price", "remaining_months", "repayment_interval", "future_value"]
 
 # Set the output file path
-output_path = Path("inexpensive_loans.csv")
+#output_path = Path("inexpensive_loans.csv")
+# os is used for joining folders with file names. Analysis folder was created and inexpensive file joined to the Analysis folder.
+output_path = os.path.join("Analysis", "inexpensive_loans.csv")
 
 # @TODO: Use the csv library and `csv.writer` to write the header row
 
 # and each row of `loan.values()` from the `inexpensive_loans` list.
 
 # YOUR CODE HERE!
+# the output file was opened as csvfilew, with w indicating mode, and newline is to remove any empty row when writing.
+with open(output_path, "w",newline="") as csvfilew:
+    # csv.writer is a built in function in csv module (just like a pen for writing)
+    csvwriter = csv.writer(csvfilew)
+    #csvwriter.writerow([header[0]]) if considering only one row of the header 
+    #csv writer used to write the header
+    csvwriter.writerow(header)
+    # look through inexpensive list and write to the file
+    for  loan in inexpensive_loans:
+        csvwriter.writerow([loan])
+
