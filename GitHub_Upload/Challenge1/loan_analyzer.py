@@ -19,25 +19,27 @@ loan_costs = [500, 600, 200, 1000, 450]
 # @TODO: Use the `len` function to calculate the total number of loans in the list.
 # Print the number of loans from the list
 # YOUR CODE HERE!
-
+# len is used in this array to calculate the number of objects stored in the loan list.
 number_of_loans = len(loan_costs)
-
+# the number of loans is now printed with descriptive message using the f string.
 print(f"the number of loans in the list is :, {number_of_loans}")
 
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
 # YOUR CODE HERE!
+# the sum function is used here to add up all the numerical values in an iterable and returns the total of those values.
 total_amount = sum(loan_costs)
-
+# the total amount of the loans is returned by printing the total amount with descriptive message using f string.
 print(f"the sum of all loans in the list is :, ${total_amount}")
 
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
 # YOUR CODE HERE!
+# the average loan amount is calculated by dividing the total amount or sum of the loan cost in line 32 by the number of loans  already calculated using the len function in line 23.
 Average_loan_amount = sum(loan_costs)/number_of_loans
-
+# the average loan amount is printed along with descriptive message using f string.
 print(f"Average loan amount is :, ${Average_loan_amount}")
 
 """Part 2: Analyze Loan Data.
@@ -74,6 +76,7 @@ loan = {
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
 # YOUR CODE HERE!
+# Using the get() function on the additiona dictionary information  for loan in line 69, each of the variables line 70 to 73 are printed along with descriptive messages.
 print(f"The current loan price is :, ${loan.get('loan_price')}")
 
 print(f"The remaining loan months is :, {loan.get('remaining_months')}")
@@ -87,10 +90,12 @@ print(f"Future Value of loan is :, ${loan.get('future_value')}")
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
 # YOUR CODE HERE!
+# the minumum return is given as 20%, this is declared in line 94 as discout rate.
 discount_rate = 0.2
-
+# the present value is declared below using the formular 'Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months'
+# Future value given in 86 and remaining months on line 82 
 present_value = loan.get("future_value") / (1+ discount_rate/12)**(loan.get("remaining_months"))
-
+# present value is calculated and print below with descriptive message.
 print(f"Present value for the remaining months is :, ${present_value :.2f}")
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
@@ -98,9 +103,12 @@ print(f"Present value for the remaining months is :, ${present_value :.2f}")
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
 # YOUR CODE HERE!
+# a conditional statement is declared in line 107  to determine if the loan is really worth, or if it make sense to buy the loan at its cost
 if present_value in loan >= loan.get("loan_price"):
+# if the present value is less than the loan, the print function returns the message that the loan is worth the cost to buy it in line 109 
     print("the loan is worth at least the cost to buy it")
 else:
+# implies that line 107 is not true hence the print function returns the message that the loan is too expensive and not worth the price in line 112  
     print("the loan is too expensive and not worth the price")
 
 """Part 3: Perform Financial Calculations.
@@ -126,6 +134,8 @@ new_loan = {
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
+# Using the new loan dictionary given in lines 126 to 131, a new function to be used in calculating present value are shown below in lines, 139, 141, 143 and 145, however line 143 is not a required output so it is commented out.
+# get () function accepts a key as an argument and returns the value associated with that key in the dictionary, hence it is used here to code 
 new_loan.get('loan_price')
 
 new_loan.get('remaining_months')
@@ -134,13 +144,22 @@ new_loan.get('remaining_months')
 
 new_loan.get('future_value')
 
+# The `annual_discount_rate` of 0.2 for the new loan is a given parameter.
+annual_discount_rate = 0.2
+
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
-discount_rate = 0.2
-# YOUR CODE HERE!
-present_value_new_loan = new_loan.get("future_value") / (1+ discount_rate/12)**(new_loan.get("remaining_months"))
 
-#print(f"The present value of the loan is: {present_value}")
+# YOUR CODE HERE!
+# the present value of the new loan is declared below using the formulae 'Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months'
+present_value_new_loan = new_loan.get("future_value") / (1+ annual_discount_rate/12)**(new_loan.get("remaining_months"))
+
+#present_value__new_loan = calculate_present_value(new_loan["future_value"], new_loan["remaining_months"], annual_discount_rate)
+
+
+
+
+# present value is calculated and printed below with descriptive message. The :.2f enables the output value to be rounded off in 2 decimal places.
 
 print(f"Present value of the new loan is :, ${present_value_new_loan :.2f}")
 
@@ -184,35 +203,32 @@ loans = [
 
 # @TODO: Create an empty list called `inexpensive_loans`
 # YOUR CODE HERE!
-inexpensive_loans = []
+# An empty list is created in line 202 with [] indicating that it is a list.
+inexpensive_loans =[]
+
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
 # YOUR CODE HERE!
-# In the code below, i represents one of the elements in the list of indices, and j represents one of the elements in the list of dictionaries
-# there are four indices (i) in the dictionary, represented from 0 to 3 and four dictionaries represented by (j)
-# to connect the connect the two seperate list into a tupple I used zip, hence 
-for (i, j) in zip(range(len(loans)), loans):
-    if j["loan_price"] <= 500:
-# if the any of the loan prices in the diction is equal or less than $500, then I append this in the empty dictionary.
-        inexpensive_loans.append(j["loan_price"])
-print(inexpensive_loans)
-# the ouput is printed with comments 
-print(f"The inexpensive loan is :, ${inexpensive_loans}")
-
-# .get(loan_price:700, loan_price:500, loan_price:200, loan_price:900)
+# to get the the loan prices only in the dictionary a get function is used for (loan_price:700, loan_price:500, loan_price:200, loan_price:900)
 # the values of the loan price is represented by (i) 
 # for i in [0 , 1, 2, 3]
-# Here I am using the len function in the dictionary 
+#  in the for loop  in line 200 the range and len functions are used to determine the length and range of the loan price in the dictionary of loans line 172 to 197
 for i in range(len(loans)):
   
-# print(loan_price in loans) using the get function 
-
-  print(loans[i].get("loan_price"))
-
-# @TODO: Print the `inexpensive_loans` list
-
-# YOUR CODE HERE!
-# The inexpensive loans from the list is printed  below with comments 
-
+# the print(loan_price in loans) using the get function in line 212 returns the array of loan prices in the dictionary.
+    print(loans[i].get('loan_price'))
+   
+# However, only the loan prices that meets the criteria ' loan price $500 or less is required to populate the empty inexpensive loan list
+# In the code below, i represents one of the elements in the list of indices, and j represents one of the elements in the list of dictionaries
+# there are four indices (i) or repeatitive tasks in the dictionary, and a range of integers represented by 0 to 3 and four dictionaries represented by (j)
+# len function is used here to represent the length or number of loans in the dictionary in this case 
+# the zip() is used to map the similar index of multiple containers in this case four, so that they can be used just as single entity., hence 
+for (i, j) in zip(range(len(loans)), loans):  
+# a conditional statement is declared in line 221 and used inside the for loop, to determine if the loan_price is less than 500
+    if j["loan_price"] <= 500:
+# if any of the loan prices in the dictionary is equal or less than $500, then the values meeting this criteria are appended in the empty list that was created in line 202
+        inexpensive_loans.append(j["loan_price"])
+# the appended values in the inexpensive loans list is now printed   
+# for clarity the ouput  for inexpensive loans is printed with a descriptive message in line 226 
 print(f"The inexpensive loan is :, ${inexpensive_loans}")
 
 """Part 5: Save the results.
@@ -228,22 +244,6 @@ Output this list of inexpensive loans to a csv file
     https://docs.python.org/3/library/csv.html#writer-objects
 
 """
-
-
-
-#inexpensive_loans = [500, 200]
-
-#filepath = Path()
-
-'''with open(filepath, "r") as csvfile:
-    #csvreader = csv.reader(csvfile)
-    #header = next(csvreader)
-    for row in csvreader:
-        print(row)'''
-
-
-
-
 # Set the output header
 header = ["loan_price", "remaining_months", "repayment_interval", "future_value"]
 
@@ -253,9 +253,7 @@ header = ["loan_price", "remaining_months", "repayment_interval", "future_value"
 output_path = os.path.join("Analysis", "inexpensive_loans.csv")
 
 # @TODO: Use the csv library and `csv.writer` to write the header row
-
 # and each row of `loan.values()` from the `inexpensive_loans` list.
-
 # YOUR CODE HERE!
 # the output file was opened as csvfilew, with w indicating mode, and newline is to remove any empty row when writing.
 with open(output_path, "w",newline="") as csvfilew:
@@ -265,6 +263,7 @@ with open(output_path, "w",newline="") as csvfilew:
     #csv writer used to write the header
     csvwriter.writerow(header)
     # look through inexpensive list and write to the file
-    for  loan in inexpensive_loans:
-        csvwriter.writerow([loan])
+    for  loan in loans:
+       if inexpensive_loans.count(loan["loan_price"])>0:
+            csvwriter.writerow([loan["loan_price"], loan["remaining_months"], loan["repayment_interval"], loan["future_value"]])
 
